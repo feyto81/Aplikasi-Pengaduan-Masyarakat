@@ -1353,8 +1353,8 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
       color: #343a40; }
 
 .form-radio-outline .form-check-input {
-  background-color: #fff;
-  position: relative; }
+  border-width: 2px;
+  background-color: #fff; }
   .form-radio-outline .form-check-input:active {
     -webkit-filter: none;
             filter: none; }
@@ -1364,12 +1364,11 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
       background-image: none; }
     .form-radio-outline .form-check-input:checked:after {
       position: absolute;
-      content: '';
-      top: 3px !important;
-      right: 3px;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%; }
+      content: '\F0765';
+      font-family: "Material Design Icons";
+      top: 6px !important;
+      right: 4px;
+      font-size: 6px; }
 
 .form-check-primary .form-check-input:checked {
   background-color: #556ee6;
@@ -1379,7 +1378,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #556ee6;
   background-color: #556ee6; }
   .form-radio-primary .form-check-input:checked:after {
-    background-color: #556ee6; }
+    color: #556ee6; }
 
 .form-check-secondary .form-check-input:checked {
   background-color: #74788d;
@@ -1389,7 +1388,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #74788d;
   background-color: #74788d; }
   .form-radio-secondary .form-check-input:checked:after {
-    background-color: #74788d; }
+    color: #74788d; }
 
 .form-check-success .form-check-input:checked {
   background-color: #34c38f;
@@ -1399,7 +1398,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #34c38f;
   background-color: #34c38f; }
   .form-radio-success .form-check-input:checked:after {
-    background-color: #34c38f; }
+    color: #34c38f; }
 
 .form-check-info .form-check-input:checked {
   background-color: #50a5f1;
@@ -1409,7 +1408,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #50a5f1;
   background-color: #50a5f1; }
   .form-radio-info .form-check-input:checked:after {
-    background-color: #50a5f1; }
+    color: #50a5f1; }
 
 .form-check-warning .form-check-input:checked {
   background-color: #f1b44c;
@@ -1419,7 +1418,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #f1b44c;
   background-color: #f1b44c; }
   .form-radio-warning .form-check-input:checked:after {
-    background-color: #f1b44c; }
+    color: #f1b44c; }
 
 .form-check-danger .form-check-input:checked {
   background-color: #f46a6a;
@@ -1429,7 +1428,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #f46a6a;
   background-color: #f46a6a; }
   .form-radio-danger .form-check-input:checked:after {
-    background-color: #f46a6a; }
+    color: #f46a6a; }
 
 .form-check-pink .form-check-input:checked {
   background-color: #e83e8c;
@@ -1439,7 +1438,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #e83e8c;
   background-color: #e83e8c; }
   .form-radio-pink .form-check-input:checked:after {
-    background-color: #e83e8c; }
+    color: #e83e8c; }
 
 .form-check-light .form-check-input:checked {
   background-color: #eff2f7;
@@ -1449,7 +1448,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #eff2f7;
   background-color: #eff2f7; }
   .form-radio-light .form-check-input:checked:after {
-    background-color: #eff2f7; }
+    color: #eff2f7; }
 
 .form-check-dark .form-check-input:checked {
   background-color: #343a40;
@@ -1459,7 +1458,7 @@ body[data-layout="horizontal"][data-layout-size="boxed"] .container-fluid, body[
   border-color: #343a40;
   background-color: #343a40; }
   .form-radio-dark .form-check-input:checked:after {
-    background-color: #343a40; }
+    color: #343a40; }
 
 .form-check-label {
   cursor: pointer;
@@ -2347,28 +2346,31 @@ input[switch="dark"]:checked + label {
 .bootstrap-timepicker-widget.timepicker-orient-bottom:after {
   border-top-color: #eff2f7; }
 
-.timepicker-orient-top {
+[dir="rtl"] .bootstrap-timepicker-widget {
+  left: 0 !important;
+  right: auto; }
+
+[dir="rtl"] .timepicker-orient-top {
   top: calc(1.5em + 0.94rem + 2px) !important; }
 
-.timepicker-orient-bottom {
+[dir="rtl"] .timepicker-orient-bottom {
   top: auto !important;
   bottom: calc(1.5em + 0.94rem + 2px) !important; }
-
-.bootstrap-timepicker-widget {
-  right: 0 !important;
-  left: auto !important; }
-
-.bootstrap-timepicker-widget.timepicker-orient-left:before {
-  right: 6px;
-  left: auto; }
-
-.bootstrap-timepicker-widget.timepicker-orient-left::after {
-  right: 7px;
-  left: auto; }
 
 [dir="rtl"] .datepicker {
   left: 0 !important;
   right: auto; }
+
+[dir="rtl"] .bootstrap-timepicker-widget {
+  left: 0 !important;
+  right: auto; }
+
+[dir="rtl"] .timepicker-orient-top {
+  top: calc(1.5em + 0.94rem + 2px) !important; }
+
+[dir="rtl"] .timepicker-orient-bottom {
+  top: auto !important;
+  bottom: calc(1.5em + 0.94rem + 2px) !important; }
 
 .datepicker {
   border: 1px solid #eff2f7;
@@ -2761,7 +2763,6 @@ div.dataTables_wrapper div.dataTables_filter {
   height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;
   border: 1px solid #ced4da;
-  background-color: #fff;
   color: #495057;
   border-radius: 0.25rem; }
   .table-edits input:focus, .table-edits select:focus {
