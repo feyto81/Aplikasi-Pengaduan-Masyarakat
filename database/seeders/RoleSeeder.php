@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\Models\Level;
 
 
 class RoleSeeder extends Seeder
@@ -15,13 +16,11 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
+        Level::create([
             'name' => 'Administrator',
-            'guard_name' => 'web'
         ]);
-        Role::create([
+        Level::create([
             'name' => 'Officer',
-            'guard_name' => 'web'
         ]);
     }
 }
