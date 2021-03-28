@@ -73,7 +73,7 @@
                                 </div>
                                 @endif
                                 <div class="p-2">
-                                    <form class="form-horizontal" action="{{url('login')}}" method="POST">
+                                    <form class="form-horizontal" action="login" method="POST">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>

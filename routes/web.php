@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +23,7 @@ Route::get('/', function () {
 Route::get('admin/login', [LoginController::class, 'showFormLogin'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logoutt');
-Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => ['role:Administrator'], 'prefix' => 'admin'], function () {
-        Route::resource('dashboard', Dashboard::class);
-    });
+Route::group(['middleware' => ['auth', 'checkRole:1'], 'prefix' => 'admin'], function () {
+    Route::resource('dashboard', DashboardController::class);
 });
 Route::get('/home', 'HomeController@index')->name('home');
