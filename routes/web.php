@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
-Route::get('admin/login', [LoginController::class, 'showFormLogin'])->name('loginn');
+Route::get('admin/login', [LoginController::class, 'showFormLogin'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logoutt');
 Route::group(['middleware' => 'auth'], function () {
