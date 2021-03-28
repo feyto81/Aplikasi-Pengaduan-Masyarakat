@@ -19,5 +19,12 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
-Route::get('admin/login', [LoginController::class, 'showFormLogin'])->name('login');
+Route::get('admin/login', [LoginController::class, 'showFormLogin'])->name('loginn');
+Route::post('login', [LoginController::class, 'login']);
+Route::get('logout', [LoginController::class, 'logout'])->name('logoutt');
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['role:Administrator'], 'prefix' => 'admin'], function () {
+        Route::resource('dashboard', Dashboard::class);
+    });
+});
 Route::get('/home', 'HomeController@index')->name('home');

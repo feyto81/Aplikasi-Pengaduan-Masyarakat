@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
+use Session;
 
 class LoginController extends Controller
 {
@@ -44,5 +47,42 @@ class LoginController extends Controller
             return redirect()->route('dashboard.index');
         }
         return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
+
+        ]);
+
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $data = array($fieldType => $input['username'], 'password' => $input['password']);
+        if (auth()->attempt($data)) {
+            $username = auth()->user()->username;
+            $status = auth()->user()->status;
+            $ldate = date('Y-m-d H:i:s');
+            $user_id = Auth::user()->id;
+            if (auth()->user()->hasRole('Administrator')) {
+
+                return redirect()->route('dashboard.index')->with(['success' => 'Welcome back ' . $username]);
+            }
+            return redirect()->route('dashboard.index')->with(['success' => 'Welcome back ' . $username]);
+        } else {
+            return redirect()->back()->with(['error' => 'Invalid email or password']);
+        }
+    }
+
+    public function logout(Request $request)
+    {
+
+
+        Auth::logout();
+        Session::flush();
+        return redirect()->route('loginn')->with(['success' => 'You have successfully logged out']);
     }
 }
