@@ -49,7 +49,7 @@ class LoginController extends Controller
             $status = auth()->user()->status;
             $ldate = date('Y-m-d H:i:s');
             $user_id = Auth::user()->id;
-            if (auth()->user()->hasRole('Administrator')) {
+            if (auth()->user()->level_id == 1) {
 
                 return redirect()->route('dashboard.index')->with(['success' => 'Welcome back ' . $username]);
             }
