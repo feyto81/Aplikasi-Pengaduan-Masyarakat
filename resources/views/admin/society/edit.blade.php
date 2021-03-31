@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Add Society</h4>
+                    <h4 class="mb-sm-0 font-size-18">Edit Society</h4>
 
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item active">Add Society</li>
+                            <li class="breadcrumb-item active">Edit Society</li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-12">
                 
-                <a href="{{route('society.index')}}" class="button"><i class="bx bx-arrow-back label-icon"></i> &nbsp;&nbsp;Back To List Society</a>
+                <a href="{{route('society.index')}}" class="button"><i class="bx bx-arrow-back label-icon"></i> &nbsp;&nbsp;Back To List User</a>
                 <br>
                 <br>
                 @if ($errors->any())
@@ -47,7 +47,7 @@
         </div>
         <br>
         <div class="row">
-            <form action="{{route('society.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('admin/society/update/'.$society->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col-12">
                     <div class="row">
@@ -57,44 +57,42 @@
                                     <div class="mb-3 row">
                                         <label for="nik" class="col-md-2 col-form-label">NIK</label>
                                         <div class="col-md-10">
-                                            <input class="form-control" type="number" id="nik" name="nik" value="{{old('nik')}}">
+                                            <input class="form-control" type="number" id="nik" name="nik" value="{{$society->nik}}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="username" class="col-md-2 col-form-label">Username</label>
                                         <div class="col-md-10">
-                                            <input class="form-control" type="text" id="username" name="username" value="{{old('username')}}">
+                                            <input class="form-control" type="text" id="username" name="username" value="{{$society->username}}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="name" class="col-md-2 col-form-label">Name</label>
                                         <div class="col-md-10">
-                                            <input class="form-control" type="text" id="name" name="name" value="{{old('name')}}">
+                                            <input class="form-control" type="text" id="name" name="name" value="{{$society->name}}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="phone_number" class="col-md-2 col-form-label">Phone Number</label>
                                         <div class="col-md-10">
-                                            <input class="form-control" type="number" id="phone_number" name="phone_number">
+                                            <input class="form-control" type="number" id="phone_number" name="phone_number" value="{{$society->phone_number}}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="address" class="col-md-2 col-form-label">Address</label>
                                         <div class="col-md-10">
-                                            <textarea class="form-control" name="address" id="address"></textarea>
+                                            <textarea class="form-control" id="address" name="address">{{$society->address}}</textarea>
                                         </div>
                                     </div>
-                                   
+                                    
                                     <div class="mb-3 row">
                                         <label for="password" class="col-md-2 col-form-label">Password</label>
                                         <div class="col-md-10">
                                             <input class="form-control" type="password" id="password" name="password">
+                                            <small><span>(Leave blank if you don't want to change the password)</span></small>
                                         </div>
                                     </div>
-                                    
-                                    
-                                    
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -106,8 +104,7 @@
                                         Mohon lengkapi form yang sudah di sediakan untuk dapat melanjutkan proses !
                                     </div>
                                     <br>
-                                    <button name="submit" type="submit" class="btn btn-primary" value="save">Save</button>
-                                    <button name="submit" type="submit" class="btn btn-primary" value="more">Save & More</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                     <a href="{{route('users.index')}}" class="btn btn-danger">Cancel</a>
                                 </div>
                             </div>
