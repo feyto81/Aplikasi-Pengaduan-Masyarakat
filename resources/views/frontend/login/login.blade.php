@@ -4,7 +4,7 @@
 <head>
         
         <meta charset="utf-8" />
-        <title>Register | Public Complaints</title>
+        <title>Login | Public Complaints</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" />
         <meta name="author" />
@@ -23,8 +23,8 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <div class="text-primary p-4">
-                                            <h5 class="text-primary">Register !</h5>
-                                            <p>Register to proceed to the Public Complaints application.</p>
+                                            <h5 class="text-primary">Login !</h5>
+                                            <p>Login to proceed to the Public Complaints application.</p>
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -73,31 +73,12 @@
                                 </div>
                                 @endif
                                 <div class="p-2">
-                                    <form class="form-horizontal" action="{{url('user/register/save')}}" method="POST" enctype="multipart/form-data">
+                                    <form class="form-horizontal" action="{{url('user/login/cek')}}" method="POST">
                                         @csrf
+                                        
                                         <div class="mb-3">
                                             <label for="nik" class="form-label">NIK</label>
-                                            <input type="number" class="form-control" name="nik" id="nik">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Name</label>
-                                            <input type="text" class="form-control" name="name" id="name">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="username" class="form-label">Username</label>
-                                            <input type="text" class="form-control" name="username" id="username">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="phone_number" class="form-label">Phone Number</label>
-                                            <input type="number" class="form-control" name="phone_number" id="phone_number">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="address" class="form-label">Address</label>
-                                            <textarea class="form-control" id="address" name="address"></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="photo" class="form-label">Photo</label>
-                                            <input type="file" class="form-control" name="photo" id="photo">
+                                            <input type="number" class="form-control" name="nik" id="nik" placeholder="Enter NIK">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="password">Password</label>
@@ -113,9 +94,8 @@
                                             <button class="btn btn-primary waves-effect waves-light" type="submit">Register</button>
                                         </div>
                                         <div class="mt-4 text-center">
-                                            <p class="mb-0">By registering you agree to the Skote <a href="#" class="text-primary">Terms of Use</a></p>
-                                            <br>
-                                            <p>Already have an account ? <a href="{{url('user/login')}}" class="fw-medium text-primary"> Login</a> </p>
+                                            
+                                            <p>Don't have an account ? <a href="{{url('user/register')}}" class="fw-medium text-primary"> Signup now </a> </p>
                                         
                                         </div>
                                     </form>
