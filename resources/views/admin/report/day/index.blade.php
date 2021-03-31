@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title','Complaints | Public Complaints')
+@section('title','Report Day | Laundry Application')
 @section('css')
 <link href="{{asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
@@ -13,16 +13,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Complaints</h4>
+                    <h4 class="mb-sm-0 font-size-18">Report Day</h4>
 
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item active">Complaints</li>
+                            <li class="breadcrumb-item active">Report Day</li>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
+        
         
         <br>
         @if ($message = Session::get('success'))
@@ -34,49 +35,62 @@
         @endif
         <br>
         <div class="row">
+            <form action="{{url('admin/report/day/search')}}" method="GET" enctype="multipart/form-data">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-3 row">
+                                        <label for="price" class="col-md-2 col-form-label">From Date</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" type="date" id="date1" name="date1" value="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="price" class="col-md-2 col-form-label">For Date</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" type="date" id="date2" name="date2" value="">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="price" class="col-md-2 col-form-label"></label>
+                                        <div class="col-md-10">
+                                            <button class="btn btn-success" type="submit"> Search</button> 
+                                            <a href="{{url('admin/report/day/cetakpdf/?date1='.Request::get('date1').'&date2='.Request::get('date2'))}}" class="btn btn-warning" target="_blank">Export PDF</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-
-                        
-
                         <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Photo</th>
-                                <th>Name</th>
-                                <th>Date Complaints</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>NIK</th>
+                                <th>Date</th>
                             </tr>
                             </thead>
 
 
                             <tbody>
-                                @foreach ($complaints as $row)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td><img src="{{url('avatar_complaint/',$row->photo)}}" width="100px"></td>
-                                    <td>{{$row->Society->name}}</td>
-                                    <td>{{date('d F Y H:i:s',strtotime($row->created_at))}}</td>
-                                    @if ($row->status == "0")
-                                        <td><span class="badge rounded-pill bg-danger">Unprocessed</span></td>
-                                    @elseif($row->status == 'process')
-                                        <td><span class="badge rounded-pill bg-primary">Processed</span></td>
-                                    @else 
-                                        <td><span class="badge rounded-pill bg-success">Finished</span></td>
-                                    @endif
-                                    <td>
-                                        <a href="{{url('admin/complaints/'.$row->id)}}" class="btn btn-danger btn-rounded waves-effect waves-light">
-                                            <i class="bx bx-edit font-size-16 align-middle"></i>
-                                        </a>
-                                        <a href="javascript: void(0);" class="btn btn-warning btn-rounded waves-effect waves-light btn-delete" title="Delete Data" society-id="{{$row->id}}">
-                                            <i class="bx bx-trash-alt font-size-16 align-middle"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                @foreach ($data as $item)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$item->nik}}</td>
+                                        <td>{{$item->date_complaint}}</td>
+                                    </tr>
+                                @endforeach    
                             </tbody>
                         </table>
 
@@ -87,6 +101,7 @@
         
     </div>
 </div>
+
 @endsection
 @push('script')
 <script src="{{asset('assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
@@ -97,7 +112,7 @@
 <script src="{{asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script> 
 <script>
     $('.btn-delete').click(function(){
-        var society_id = $(this).attr('society-id');
+        var paket_id = $(this).attr('paket-id');
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success mt-2',
@@ -117,7 +132,7 @@
         cancelButtonClass:"btn btn-danger ms-2 mt-2",
         buttonsStyling:!1}).then((result) => {
         if (result.isConfirmed) {
-            window.location = "{{url('admin/society/delete')}}/"+society_id+"";
+            window.location = "{{url('admin/transaction/delete')}}/"+paket_id+"";
         } else if (
             result.dismiss === Swal.DismissReason.cancel
         ) {
@@ -131,24 +146,19 @@
     });
     $(document).ready(function() {
         $(document).on('click', '#set_dtl', function() {
-            var username = $(this).data('username');
-            var name = $(this).data('name');
-            var email = $(this).data('email');
-            var privilege = $(this).data('privilege');
             var outlet = $(this).data('outlet');
-            var status = $(this).data('status');
-            var photo = $(this).data('photo');
+            var type = $(this).data('type');
+            var paket_name = $(this).data('paket_name');
+            var price = $(this).data('price');
             var created = $(this).data('created');
             var updated = $(this).data('updated');
-            $('#username').text(username);
-            $('#name').text(name);
-            $('#email').text(email);
-            $('#privilege').text(privilege);
             $('#outlet').text(outlet);
+           
+            $('#type').text(type);
+            $('#paket_name').text(paket_name);
+            $('#price').text(price);
             $('#created').text(created);
             $('#updated').text(updated);
-            $('#img-data').attr('src', "{{asset('avatar/')}}/"+photo);
-
         })
     })
 </script>
