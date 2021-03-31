@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title','Management User | Public Complaints')
+@section('title','Society | Public Complaints')
 @section('css')
 <link href="{{asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
@@ -13,11 +13,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Users Manajement</h4>
+                    <h4 class="mb-sm-0 font-size-18">Society</h4>
 
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">Society</li>
                         </ol>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a href="{{route('users.create')}}" class="btn btn-success waves-effect btn-label waves-light"><i class="bx bxs-plus-square label-icon"></i> Add</a>
+                <a href="{{route('society.create')}}" class="btn btn-success waves-effect btn-label waves-light"><i class="bx bxs-plus-square label-icon"></i> Add</a>
             </div>
         </div>
         <br>
@@ -48,33 +48,28 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Officer Name</th>
-                                <th>Email</th>
+                                <th>Nik</th>
                                 <th>Username</th>
                                 <th>Phone Number</th>
-                                <th>Privilege</th>
+                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
 
 
                             <tbody>
-                                @foreach ($users as $row)
+                                @foreach ($society as $row)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$row->officer_name}}</td>
-                                    <td>{{$row->email}}</td>
+                                    <td>{{$row->nik}}</td>
                                     <td>{{$row->username}}</td>
                                     <td>{{$row->phone_number}}</td>
+                                    <td>{{$row->address}}</td>
                                     <td>
-                                        <span class="badge rounded-pill bg-primary">{{$row->Level->name}}</span>
-                                    </td>
-                                    
-                                    <td>
-                                        <a href="{{url('admin/users/edit/'.$row->id)}}" class="btn btn-danger btn-rounded waves-effect waves-light">
+                                        <a href="{{url('admin/society/edit/'.$row->id)}}" class="btn btn-danger btn-rounded waves-effect waves-light">
                                             <i class="bx bx-edit font-size-16 align-middle"></i>
                                         </a>
-                                        <a href="javascript: void(0);" class="btn btn-warning btn-rounded waves-effect waves-light btn-delete" title="Delete Data" user-id="{{$row->id}}">
+                                        <a href="javascript: void(0);" class="btn btn-warning btn-rounded waves-effect waves-light btn-delete" title="Delete Data" society-id="{{$row->id}}">
                                             <i class="bx bx-trash-alt font-size-16 align-middle"></i>
                                         </a>
                                     </td>
@@ -100,7 +95,7 @@
 <script src="{{asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script> 
 <script>
     $('.btn-delete').click(function(){
-        var user_id = $(this).attr('user-id');
+        var society_id = $(this).attr('society-id');
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success mt-2',
@@ -120,7 +115,7 @@
         cancelButtonClass:"btn btn-danger ms-2 mt-2",
         buttonsStyling:!1}).then((result) => {
         if (result.isConfirmed) {
-            window.location = "{{url('admin/users/delete')}}/"+user_id+"";
+            window.location = "{{url('admin/society/delete')}}/"+society_id+"";
         } else if (
             result.dismiss === Swal.DismissReason.cancel
         ) {

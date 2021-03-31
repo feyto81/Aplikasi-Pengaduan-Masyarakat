@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title','Management User | Public Complaints')
+@section('title','Society | Public Complaints')
 @section('css')
 
 @endsection
@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Add Users</h4>
+                    <h4 class="mb-sm-0 font-size-18">Add Society</h4>
 
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item active">Add Users</li>
+                            <li class="breadcrumb-item active">Add Society</li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-12">
                 
-                <a href="{{route('users.index')}}" class="button"><i class="bx bx-arrow-back label-icon"></i> &nbsp;&nbsp;Back To List User</a>
+                <a href="{{route('society.index')}}" class="button"><i class="bx bx-arrow-back label-icon"></i> &nbsp;&nbsp;Back To List User</a>
                 <br>
                 <br>
                 @if ($errors->any())
@@ -47,7 +47,7 @@
         </div>
         <br>
         <div class="row">
-            <form action="{{route('users.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('society.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col-12">
                     <div class="row">
@@ -55,9 +55,9 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="mb-3 row">
-                                        <label for="name" class="col-md-2 col-form-label">Officer Name</label>
+                                        <label for="nik" class="col-md-2 col-form-label">NIK</label>
                                         <div class="col-md-10">
-                                            <input class="form-control" type="text" id="officer_name" name="officer_name" value="{{old('officer_name')}}">
+                                            <input class="form-control" type="number" id="nik" name="nik" value="{{old('nik')}}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -67,28 +67,18 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="email" class="col-md-2 col-form-label">Email</label>
-                                        <div class="col-md-10">
-                                            <input class="form-control" type="email" id="email" name="email" value="{{old('email')}}">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
                                         <label for="phone_number" class="col-md-2 col-form-label">Phone Number</label>
                                         <div class="col-md-10">
                                             <input class="form-control" type="number" id="phone_number" name="phone_number">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="level_id" class="col-md-2 col-form-label">Privilege</label>
+                                        <label for="address" class="col-md-2 col-form-label">Address</label>
                                         <div class="col-md-10">
-                                            <select class="form-select select2" id="level_id" name="level_id">
-                                                <option disabled selected>--Select--</option>
-                                                @foreach ($level as $row)
-                                                <option value="{{$row->id}}">{{$row->name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <textarea class="form-control" name="address" id="address"></textarea>
                                         </div>
                                     </div>
+                                   
                                     <div class="mb-3 row">
                                         <label for="password" class="col-md-2 col-form-label">Password</label>
                                         <div class="col-md-10">
